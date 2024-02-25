@@ -94,7 +94,7 @@ jobs:
             latest=false
           images: |
             name=ghcr.io/${{ github.repository }}
-            name=tensorchord/cloudnative-pgvecto-rs
+            name=starkind/cloudnative-pgvecto-rs
           tags: |
             type=raw,value=${{ matrix.cnpg }}-${{ matrix.pgvectors }},enable=${{ steps.should-release.outputs.result }}
             type=raw,value=${{ steps.version.outputs.pg_major }}-${{ matrix.pgvectors }},enable=${{ steps.should-release.outputs.result }}
@@ -105,8 +105,8 @@ jobs:
         uses: docker/build-push-action@v5.1.0
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
-          push: ${{ !github.event.pull_request.head.repo.fork && steps.metadata.outputs.tags != '' }}
+          platforms: linux/amd64
+          push: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
           tags: ${{ steps.metadata.outputs.tags }}
